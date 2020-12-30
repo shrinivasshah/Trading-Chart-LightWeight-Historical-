@@ -12,10 +12,9 @@ function App() {
     const apiCaller = async () => {
       const response = await axios.get("http://localhost:9000/coins/BTCINR");
       // console.log(response.data);
-      for (let i of response.data) {
-        setCategory((prevProps) => [...prevProps, i["time"]]);
-        setSeriesData((prevProps) => [...prevProps, i["buy"]]);
-      }
+
+      setCategory(response.data["time"]);
+      setSeriesData(response.data["buy"]);
     };
     apiCaller();
   }, []);
