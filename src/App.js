@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./App.css";
+import { createChart } from "lightweight-charts";
+import ApexCharts from "./ApexCharts";
 
 function App() {
+  const [category, setCategory] = useState([]);
+  const [seriesData, setSeriesData] = useState([]);
+  useEffect(() => {
+    const apiCaller = async () => {
+      const response = await axios.get("http://localhost:9000/coins/BTCINR");
+      // console.log(response.data);
+      for (let i of response.data) {
+        setCategory((prevProps) => [...prevProps, i["time"]]);
+        setSeriesData((prevProps) => [...prevProps, i["buy"]]);
+      }
+    };
+    apiCaller();
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <ApexCharts category={category} seriesData={seriesData} />
     </div>
   );
 }
