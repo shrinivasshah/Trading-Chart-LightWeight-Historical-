@@ -8,13 +8,27 @@ const ApexChart = ({ category, seriesData }) => {
     <Chart
       options={{
         chart: {
+          // animations: {
+          //   enabled: true,
+          //   easing: "easeout",
+          //   speed: 200,
+          //   animateGradually: {
+          //     enabled: true,
+          //     delay: 150,
+          //   },
+          //   dynamicAnimation: {
+          //     enabled: true,
+          //     speed: 100,
+          //   },
+          // },
+
           type: "area",
           stacked: false,
           height: 350,
           zoom: {
             type: "x",
             enabled: true,
-            autoScaleYaxis: true,
+            autoScaleYaxis: false,
           },
           toolbar: {
             autoSelected: "zoom",
@@ -23,6 +37,15 @@ const ApexChart = ({ category, seriesData }) => {
         dataLabels: {
           enabled: false,
         },
+        // dropShadow: {
+        //   enabled: false,
+        //   enabledOnSeries: undefined,
+        //   top: 0,
+        //   left: 0,
+        //   blur: 3,
+        //   color: "#000",
+        //   opacity: 0.35,
+        // },
         markers: {
           size: 0,
         },
@@ -49,20 +72,85 @@ const ApexChart = ({ category, seriesData }) => {
           },
         },
         yaxis: {
-          //   labels: {
-          //     formatter: function (val) {
-          //       return (val / 1000000).toFixed(0);
-          //     },
-          //   },
+          labels: {
+            formatter: function (val) {
+              return `₹${val}`;
+            },
+          },
           title: {
             text: "Price",
           },
         },
-        colors: ["#9C27B0"],
         xaxis: {
-          type: "time",
+          title: {
+            text: "1 MINUTE CHART",
+          },
           categories: category,
+          labels: {
+            show: false,
+          },
+          axisBorder: {
+            show: false,
+            color: "#78909C",
+            height: 1,
+            width: "100%",
+            offsetX: 0,
+            offsetY: 0,
+          },
+          axisTicks: {
+            show: true,
+            borderType: "solid",
+            color: "#78909C",
+            height: 2,
+            offsetX: 0,
+            offsetY: 0,
+          },
+          // tickAmount: 20,
+          // tickPlacement: "between",
+          // min: 0,
+          // max: 100,
+          // range: undefined,
+          // floating: false,
+          // position: "bottom",
+          // title: {
+          //   text: undefined,
+          //   offsetX: 0,
+          //   offsetY: 0,
+          //   style: {
+          //     color: undefined,
+          //     fontSize: "12px",
+          //     fontFamily: "Helvetica, Arial, sans-serif",
+          //     fontWeight: 600,
+          //     cssClass: "apexcharts-xaxis-title",
+          //   },
+          // },
         },
+        // crosshairs: {
+        //   show: true,
+        //   width: 1,
+        //   position: "back",
+        //   opacity: 0.9,
+        //   stroke: {
+        //     color: "#b6b6b6",
+        //     width: 0,
+        //     dashArray: 0,
+        //   },
+        //   fill: {
+        //     type: "solid",
+        //     color: "#B1B9C4",
+        //     gradient: {
+        //       colorFrom: "#D8E3F0",
+        //       colorTo: "#BED1E6",
+        //       stops: [0, 100],
+        //       opacityFrom: 0.4,
+        //       opacityTo: 0.5,
+        //     },
+        //   },
+        // },
+        // max: 99,
+        // min: 0,
+        colors: ["#9C27B0"],
+
         // tooltip: {
         //   shared: false,
         //   y: {
@@ -71,6 +159,51 @@ const ApexChart = ({ category, seriesData }) => {
         //     },
         //   },
         // },
+        tooltip: {
+          enabled: true,
+          enabledOnSeries: undefined,
+          shared: true,
+          followCursor: true,
+          intersect: false,
+          inverseOrder: false,
+          // custom: false,
+          fillSeriesColor: false,
+          theme: "dark",
+          style: {
+            fontSize: "12px",
+            fontFamily: undefined,
+          },
+          onDatasetHover: {
+            highlightDataSeries: true,
+          },
+          // x: {
+          //   show: true,
+          //   format: "dd MMM",
+          //   formatter: undefined,
+          // },
+          // y: {
+          //   formatter: undefined,
+          //   title: {
+          //     formatter: (seriesName) => seriesName,
+          //   },
+          // },
+          // z: {
+          //   formatter: undefined,
+          //   title: "Size: ",
+          // },
+          marker: {
+            show: false,
+          },
+          // items: {
+          //   display: flex,
+          // },
+          fixed: {
+            enabled: false,
+            position: "topRight",
+            offsetX: 0,
+            offsetY: 0,
+          },
+        },
       }}
       series={[
         {
